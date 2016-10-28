@@ -130,6 +130,22 @@ enum class key_code : uint32_t {
   vk_dashboard,
   vk_launchpad,
   vk_mission_control,
+
+  // Modifier + Spacebar combinations
+  vk_combination_begin,
+  vk_left_shift_spacebar = vk_combination_begin,
+  vk_left_control_spacebar,
+  vk_left_option_spacebar,
+  vk_right_shift_spacebar,
+  vk_right_control_spacebar,
+  vk_right_option_spacebar,
+  vk_left_shift_return,
+  vk_left_control_return,
+  vk_left_option_return,
+  vk_right_shift_return,
+  vk_right_control_return,
+  vk_right_option_return,
+  vk_combination_end,
 };
 
 enum class pointing_button : uint32_t {
@@ -250,6 +266,54 @@ public:
       return modifier_flag::fn;
     default:
       return modifier_flag::zero;
+    }
+  }
+
+  // combination virtual key code -> modifier code
+  static boost::optional<key_code> get_combination_modifier_code(key_code key_code) {
+    switch (key_code) {
+    case key_code::vk_left_shift_spacebar:
+    case key_code::vk_left_shift_return:
+      return static_cast<enum key_code>(kHIDUsage_KeyboardLeftShift);
+    case key_code::vk_left_control_spacebar:
+    case key_code::vk_left_control_return:
+      return static_cast<enum key_code>(kHIDUsage_KeyboardLeftControl);
+    case key_code::vk_left_option_spacebar:
+    case key_code::vk_left_option_return:
+      return static_cast<enum key_code>(kHIDUsage_KeyboardLeftAlt);
+    case key_code::vk_right_shift_spacebar:
+    case key_code::vk_right_shift_return:
+      return static_cast<enum key_code>(kHIDUsage_KeyboardRightShift);
+    case key_code::vk_right_control_spacebar:
+    case key_code::vk_right_control_return:
+      return static_cast<enum key_code>(kHIDUsage_KeyboardRightControl);
+    case key_code::vk_right_option_spacebar:
+    case key_code::vk_right_option_return:
+      return static_cast<enum key_code>(kHIDUsage_KeyboardRightAlt);
+    default:
+      return boost::none;
+    }
+  }
+
+  // combination virtual key code -> key code
+  static boost::optional<key_code> get_combination_key_code(key_code key_code) {
+    switch (key_code) {
+    case key_code::vk_left_shift_spacebar:
+    case key_code::vk_left_control_spacebar:
+    case key_code::vk_left_option_spacebar:
+    case key_code::vk_right_shift_spacebar:
+    case key_code::vk_right_control_spacebar:
+    case key_code::vk_right_option_spacebar:
+      return get_key_code("spacebar");
+    case key_code::vk_left_shift_return:
+    case key_code::vk_left_control_return:
+    case key_code::vk_left_option_return:
+    case key_code::vk_right_shift_return:
+    case key_code::vk_right_control_return:
+    case key_code::vk_right_option_return:
+      return get_key_code("return_or_enter");
+    default:
+      return boost::none;
     }
   }
 
@@ -454,6 +518,20 @@ public:
           {"vk_dashboard", key_code::vk_dashboard},
           {"vk_launchpad", key_code::vk_launchpad},
           {"vk_mission_control", key_code::vk_mission_control},
+
+          // Modifier + Spacebar combinations
+          {"left_shift_spacebar", key_code::vk_left_shift_spacebar},
+          {"left_control_spacebar", key_code::vk_left_control_spacebar},
+          {"left_option_spacebar", key_code::vk_left_option_spacebar},
+          {"right_shift_spacebar", key_code::vk_right_shift_spacebar},
+          {"right_control_spacebar", key_code::vk_right_control_spacebar},
+          {"right_option_spacebar", key_code::vk_right_option_spacebar},
+          {"left_shift_return", key_code::vk_left_shift_return},
+          {"left_control_return", key_code::vk_left_control_return},
+          {"left_option_return", key_code::vk_left_option_return},
+          {"right_shift_return", key_code::vk_right_shift_return},
+          {"right_control_return", key_code::vk_right_control_return},
+          {"right_option_return", key_code::vk_right_option_return},
       };
       for (const auto& pair : pairs) {
         if (map.find(pair.first) != map.end()) {

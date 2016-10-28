@@ -220,6 +220,23 @@ public:
       return;
     }
 
+    if (krbn::key_code::vk_combination_begin <= to_key_code &&
+        to_key_code < krbn::key_code::vk_combination_end) {
+      auto comb_mod = krbn::types::get_combination_modifier_code(to_key_code);
+      auto comb_key = krbn::types::get_combination_key_code(to_key_code);
+      if (comb_mod && comb_key) {
+        if (pressed) {
+          post_modifier_flag_event(*comb_mod, pressed, keyboard_type);
+          post_key(from_key_code, *comb_key, pressed, false, keyboard_type);
+        } else {
+          post_key(from_key_code, *comb_key, pressed, false, keyboard_type);
+          post_modifier_flag_event(*comb_mod, pressed, keyboard_type);
+        }
+        key_repeat_manager_.stop();
+        return;
+      }
+    }
+
     if (post_modifier_flag_event(to_key_code, pressed, keyboard_type)) {
       key_repeat_manager_.stop();
       return;

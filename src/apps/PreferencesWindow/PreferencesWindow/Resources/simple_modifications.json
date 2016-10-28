@@ -484,4 +484,55 @@
 }, {
     "name": "right_gui",
     "label": "right_gui (equal to `right_command`)"
+}, {
+    "category": "Modifier + Spacebar / Enter",
+    "not_from": true
+}, {
+    "name": "left_shift_spacebar",
+    "label": "left_shift + spacebar",
+    "not_from": true
+}, {
+    "name": "left_control_spacebar",
+    "label": "left_control + spacebar",
+    "not_from": true
+}, {
+    "name": "left_option_spacebar",
+    "label": "left_option + spacebar",
+    "not_from": true
+}, {
+    "name": "right_shift_spacebar",
+    "label": "right_shift + spacebar",
+    "not_from": true
+}, {
+    "name": "right_control_spacebar",
+    "label": "right_control + spacebar",
+    "not_from": true
+}, {
+    "name": "right_option_spacebar",
+    "label": "right_option + spacebar",
+    "not_from": true
+}, {
+    "name": "left_shift_return",
+    "label": "left_shift + return",
+    "not_from": true
+}, {
+    "name": "left_control_return",
+    "label": "left_control + return",
+    "not_from": true
+}, {
+    "name": "left_option_return",
+    "label": "left_option + return",
+    "not_from": true
+}, {
+    "name": "right_shift_return",
+    "label": "right_shift + return",
+    "not_from": true
+}, {
+    "name": "right_control_return",
+    "label": "right_control + return",
+    "not_from": true
+}, {
+    "name": "right_option_return",
+    "label": "right_option + return",
+    "not_from": true
 }]
